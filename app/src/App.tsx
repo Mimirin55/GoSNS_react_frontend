@@ -1,25 +1,19 @@
-import { useEffect } from "react";
+import { RecoilRoot } from "recoil";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Toaster } from "@/components/ui/sonner"
+import { AppRoutes } from "@/routes/AppRoutes";
 
-function App() {
-  useEffect(() => {
-    fetch("http://localhost:8080/")
-      .then((res) => {
-        if (!res.ok) throw new Error("Network response was not ok");
-        return res.json();
-      })
-      .then((data) => {
-        console.log("APIレスポンス:", data);
-      })
-      .catch((err) => {
-        console.error("通信エラー:", err);
-      });
-  }, []);
-
+const App = () => {
   return (
-    <div>
-      <h1>Goと通信テスト中！</h1>
-    </div>
+    <RecoilRoot>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/*" element={<AppRoutes />} />
+        </Routes>
+      </BrowserRouter>
+      <Toaster />
+    </RecoilRoot>
   );
-}
+};
 
 export default App;
